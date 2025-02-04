@@ -19,7 +19,10 @@ namespace OOPalapok
 
 		public override string ToString()
 		{
-			return $"Testsúly: {testSuly} kg, Magasság: {testMagassag} cm";
+			double tti = TestTomegIndex();
+			string testalkat = Testalkat();
+
+			return $"{testSuly,10:F1} | {testMagassag,10} | {tti,10:F2} | {testalkat,-12}";
 		}
 
 		public double TestTomegIndex()
@@ -29,10 +32,18 @@ namespace OOPalapok
 			return Math.Round(tti, 2);
 		}
 
-		public bool NormalTTI()
+		public string Testalkat()
 		{
 			double tti = TestTomegIndex();
-			return tti >= 18.5 && tti < 25;
+			if (tti < 18.5)
+				return "alultáplált";
+			else if (tti >= 18.5 && tti < 25)
+				return "normál";
+			else
+				return "túlsúlyos";
 		}
+
+		public double GetTestSuly() => testSuly;
+		public int GetTestMagassag() => testMagassag;
 	}
 }
